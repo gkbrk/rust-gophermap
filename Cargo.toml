@@ -1,0 +1,14 @@
+[package]
+name = "gophermap"
+version = "0.1.0"
+authors = ["Gokberk Yaltirakli <leo@gkbrk.com>"]
+description = "Parse and generate Gopher responses"
+repository = "https://github.com/gkbrk/rust-gophermap"
+homepage = "https://github.com/gkbrk/rust-gophermap"
+documentation = "https://docs.rs/gophermap"
+license = "MIT"
+readme = "README.md"
+keywords = ["gopher", "protocol", "parser", "serializer"]
+edition = "2018"
+
+[dependencies]
