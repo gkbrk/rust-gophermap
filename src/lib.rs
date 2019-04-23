@@ -67,6 +67,48 @@ impl<'a> GopherEntry<'a> {
     }
 }
 
+pub struct GopherMenu<W>
+where
+    W: Write,
+{
+    target: W,
+}
+
+impl<'a, W> GopherMenu<&'a W>
+where
+    &'a W: Write,
+{
+    pub fn with_write(target: &'a W) -> Self {
+        GopherMenu { target: &target }
+    }
+
+    pub fn info(&self, text: &str) -> std::io::Result<()> {
+        self.write_entry(ItemType::Info, text, "FAKE", "fake.host", 1)
+    }
+
+    pub fn write_entry(
+        &self,
+        item_type: ItemType,
+        text: &str,
+        selector: &str,
+        host: &str,
+        port: u16,
+    ) -> std::io::Result<()> {
+        GopherEntry {
+            item_type,
+            display_string: text,
+            selector,
+            host,
+            port,
+        }
+        .write(self.target)
+    }
+
+    pub fn end(&mut self) -> std::io::Result<()> {
+        write!(self.target, ".\r\n")
+    }
+}
+
 /// Item type for a Gopher directory entry
 #[derive(Debug, PartialEq)]
 pub enum ItemType {
