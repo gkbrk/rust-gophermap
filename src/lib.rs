@@ -41,7 +41,11 @@ impl<'a> GopherEntry<'a> {
 
         Some(GopherEntry {
             item_type: ItemType::from(line.chars().next()?),
-            display_string: &parts.next()?[1..],
+            display_string: {
+                let part = parts.next()?;
+                let (index, _) = part.char_indices().skip(1).next()?;
+                &part[index..]
+            },
             selector: parts.next()?,
             host: parts.next()?,
             port: parts.next()?.parse().ok()?,

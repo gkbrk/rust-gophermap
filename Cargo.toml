@@ -1,6 +1,6 @@
 [package]
 name = "gophermap"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["Gokberk Yaltirakli <leo@gkbrk.com>"]
 description = "Parse and generate Gopher responses"
 repository = "https://github.com/gkbrk/rust-gophermap"
