@@ -3,6 +3,8 @@
 //! any I/O on purpose. This library is meant to be used by other servers and
 //! clients in order to avoid re-implementing the gophermap logic.
 //!
+#![forbid(unsafe_code)]
+
 use std::io::Write;
 
 /// A single entry in a Gopher map. This struct can be filled in order to
@@ -88,6 +90,10 @@ where
 
     pub fn info(&self, text: &str) -> std::io::Result<()> {
         self.write_entry(ItemType::Info, text, "FAKE", "fake.host", 1)
+    }
+
+    pub fn error(&self, text: &str) -> std::io::Result<()> {
+        self.write_entry(ItemType::Error, text, "FAKE", "fake.host", 1)
     }
 
     pub fn write_entry(
